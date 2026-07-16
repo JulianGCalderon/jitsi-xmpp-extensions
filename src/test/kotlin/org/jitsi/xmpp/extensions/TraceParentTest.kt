@@ -30,7 +30,8 @@ class TraceParentTest : ShouldSpec() {
         context("Parsing a valid extension") {
             val traceParent = provider.parse(
                 PacketParserUtils.getParserFor(
-                    "<trace trace_id='1586bb16ccd4475a9f494bf43563ce28' parent_id='6e39899d78bfa0ae' trace_flags='35'/>"
+                    "<traceparent trace_id='1586bb16ccd4475a9f494bf43563ce28' " +
+                        "parent_id='6e39899d78bfa0ae' trace_flags='35'/>"
                 )
             )
 
@@ -43,7 +44,7 @@ class TraceParentTest : ShouldSpec() {
             shouldThrow<SmackParsingException> {
                 provider.parse(
                     PacketParserUtils.getParserFor(
-                        "<trace parent_id='6e39899d78bfa0ae' trace_flags='35'/>"
+                        "<traceparent parent_id='6e39899d78bfa0ae' trace_flags='35'/>"
                     )
                 )
             }
@@ -53,7 +54,7 @@ class TraceParentTest : ShouldSpec() {
             shouldThrow<SmackParsingException> {
                 provider.parse(
                     PacketParserUtils.getParserFor(
-                        "<trace trace_id='1586bb16ccd4475a9f494bf43563ce28' trace_flags='35'/>"
+                        "<traceparent trace_id='1586bb16ccd4475a9f494bf43563ce28' trace_flags='35'/>"
                     )
                 )
             }
@@ -63,7 +64,8 @@ class TraceParentTest : ShouldSpec() {
             shouldThrow<SmackParsingException> {
                 provider.parse(
                     PacketParserUtils.getParserFor(
-                        "<trace trace_id='1586bb16ccd4475a9f494bf43563ce28' parent_id='6e39899d78bfa0ae'/>"
+                        "<traceparent trace_id='1586bb16ccd4475a9f494bf43563ce28' " +
+                            "parent_id='6e39899d78bfa0ae'/>"
                     )
                 )
             }
